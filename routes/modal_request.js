@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/modal', (req, res) => {
-	const db = admin.firestore(); 
+	const db = admin.firestore(); console.log(req);
 	var host = req.headers.host;
 
 	let client = db.collection('clients').doc(host);
