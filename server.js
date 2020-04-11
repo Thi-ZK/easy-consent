@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 
-const modal_req_router = require('./routes/modal_request.js');
-const test_router2 = require('./routes/test_2.js');
+const modal_req_router = require('./controllers/modal_request.js');
+const test_router2 = require('./controllers/test_2.js');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');

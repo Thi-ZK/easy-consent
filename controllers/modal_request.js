@@ -24,4 +24,12 @@ router.get('/modal', (req, res) => {
 	});
 });
 
+router.get('/TEST_MODAL', (req, res) => {
+	if (req.headers.host == "127.0.0.1:9999") {
+		res.render('modal');
+	}else{
+		res.send("Not Allowed");
+	}
+});
+
 module.exports = router;
