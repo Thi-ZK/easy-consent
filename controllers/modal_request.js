@@ -11,22 +11,25 @@ router.get('/', (req, res) => {
 
 router.get('/modal', (req, res) => {
 	var domain = req.query.domain;
+	var lang = req.query.lang;
 
 	db_model.get_doc("clients", domain).then((data) => {
-		fs.readFile(path.resolve("public/javascripts/modal_request_all_data.js"), 'utf-8', (err, js_data) => {
-		  	if (err) res.send("Error reading file");
+		fs.readFile(path.resolve("public/javascripts/modal_request_all_data_" + lang + ".js"), 'utf-8', (err, js_data) => {
+		  	if (err) {
+		  		return res.send("Error reading file or You Requested Something Unexisting");
+		  	}
 
 		  	final_script = 'window.__modal_domain_flag="' + req.query.domain + '";' + js_data;
 		  	res.send(final_script);
 		});
 	}).catch(() => {
-		res.send("Internal Error");
+		res.send("Internal Error or You Requested Something Unexisting");
 	});
 });
 
 router.get('/TEST_MODAL', (req, res) => {
 	if (req.headers.host == "127.0.0.1:9999") {
-		res.render('modal');
+		res.render('modal_br');
 	}else{
 		res.send("Not Allowed");
 	}
