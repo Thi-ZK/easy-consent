@@ -9,21 +9,16 @@ router.get('/', (req, res) => {
 	res.send("E A TERRA TODA TREMER QUE EU JAMAIS VOU DEIXAR DE TE AMAR TE QUERER");
 });
 
-router.get('/modal', (req, res) => {
+router.get('/modal', (req, res) => { // later on identify which type user wants the modal, with or without cookies descrp and if only warn modal
 	var domain = req.query.domain;
 	var lang = req.query.lang;
 
-	db_model.get_doc("clients", domain).then((data) => {
-		fs.readFile(path.resolve("public/javascripts/modal_request_all_data_" + lang + ".js"), 'utf-8', (err, js_data) => {
-		  	if (err) {
-		  		return res.send("Error reading file or You Requested Something Unexisting");
-		  	}
-
-		  	final_script = 'window.__modal_domain_flag="' + req.query.domain + '";' + js_data;
-		  	res.send(final_script);
-		});
-	}).catch(() => {
-		res.send("Internal Error or You Requested Something Unexisting");
+	//get cookies from domain and already verify if domain is registered. cookies are documents
+	db_model.get_sub_collection_all_docs('clients', domain, 'cookie_scan_results').then(all_docs => {
+		console.log(all_docs);
+		res.render('modals_with_cookie_scan/modal_js_' + lang, {scan_data: all_docs, modal_domain_flag: domain});
+	}).catch(error => {console.log("hallo");
+		res.send(error);
 	});
 });
 
