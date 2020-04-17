@@ -834,6 +834,19 @@
 					}catch(error){console.log(error);}
 				}
 
+				 var db_reads_reduction_cookie_management = function(set_or_delete){
+	                if (set_or_delete == "set") {
+	                    var script = document.createElement("script");
+	                    // script.src = "/modal_request/modal_closed";
+	                    script.src = "https://easy-consent.herokuapp.com/modal_request/modal_closed";
+	                    document.body.appendChild(script);
+	                }else {
+	                    var script = document.createElement("script");
+	                    script.src = "https://easy-consent.herokuapp.com/modal_request/modal_restore";
+	                    document.body.appendChild(script);
+	                }
+	            }
+
 				aux_optin_cookies_controller();
 
 				// all escape buttons logic 
@@ -853,6 +866,8 @@
 								optin_modal.style.opacity = "0";
 								elem_visibility_setter(optin_modal, "hidden", 600);
 							}
+
+							db_reads_reduction_cookie_management('set');
 							window.scrollTo(0, 0);
 						}catch(error){error_handler();}
 					});
