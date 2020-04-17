@@ -50,13 +50,13 @@ router.get('/TEST_MODAL', (req, res) => {
 
 // sets cookie to prevent readings from db, returning nothing since user don't need the modal
 router.get('/modal_closed', (req, res) => {console.log("HAPPENED!!!!! 1");
-	res.cookie('cookies.easy_consent_rdr_flag', '1', {maxAge: 63113804000});
+	res.cookie('easy_consent_rdr_flag', '1', {maxAge: 63113804000});
 	res.send("");
 });
 
 // deletes cookie to enable readings from db again, user may have expired the config cookie
 router.get('/modal_restore', (req, res) => {console.log("HAPPENED!!!!! 2");
-	res.clearCookie('cookies.easy_consent_rdr_flag');
+	res.clearCookie('easy_consent_rdr_flag');
 	res.send("");
 });
 
