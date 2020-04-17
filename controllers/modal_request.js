@@ -9,11 +9,12 @@ router.get('/', (req, res) => {
 
 // For Production Handling
 router.get('/modal', (req, res) => { // later on identify which type user wants the modal, with or without cookies descrp and if only warn modal
-	console.log(req);
+	console.log("\n\n\n");
+	console.log(req.cookies);
 	console.log("\n\n\n");
 
 	// check if user has already chosen an option and therefore has the cookie before reading the DB // reduce the number of reads
-	if (!req.headers.cookie.includes("optin_options_and_flag=notwnedige*true")) {
+	// if (!req.cookies.easy_consent_presence_flag) {
 		let domain = req.query.domain || "127.0.0.1:9999";
 		let lang = req.query.lang;
 		const modal_to_render = 'modals_with_cookie_scan/modal_js_' + (lang || 'br');
@@ -31,24 +32,23 @@ router.get('/modal', (req, res) => { // later on identify which type user wants 
 			// console.log("hallo");
 			res.send(error);
 		});
-	}else{
-		res.send("");
-	}
+	// }else{
+	// 	res.send("");
+	// }
 });
 
 // For Implementation & Testing
 router.get('/TEST_MODAL', (req, res) => {
 	if (req.headers.host == "127.0.0.1:9999") {
-		console.log(req);
 		db_model.get_sub_collection_all_docs('clients', 'zkitens.herokuapp', 'cookie_scan_results').then(all_docs => {
 			let all_data = {
 				scan_data: all_docs,
 			};
 
-			 // console.log(all_docs);
+			// console.log(all_docs);
 			res.render('modal_br', all_data);
 		}).catch(error => { console.log(error);
-			console.log("hallo");
+			// console.log("hallo");
 			res.send(error);
 		});
 	}else{
