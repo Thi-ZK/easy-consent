@@ -9,7 +9,9 @@ router.get('/', (req, res) => {
 
 // For Production Handling
 router.get('/modal', (req, res) => { // later on identify which type user wants the modal, with or without cookies descrp and if only warn modal
-	
+	console.log(req.cookies);
+	console.log("\n\n\n");
+	console.log(req.cookie);
 	// check if user has already chosen an option and therefore has the cookie before reading the DB // reduce the number of reads
 	if (!req.headers.cookie.includes("optin_options_and_flag=notwnedige*true")) {
 		let domain = req.query.domain || "127.0.0.1:9999";
@@ -37,7 +39,7 @@ router.get('/modal', (req, res) => { // later on identify which type user wants 
 // For Implementation & Testing
 router.get('/TEST_MODAL', (req, res) => {
 	if (req.headers.host == "127.0.0.1:9999") {
-		
+		console.log(req);
 		db_model.get_sub_collection_all_docs('clients', 'zkitens.herokuapp', 'cookie_scan_results').then(all_docs => {
 			let all_data = {
 				scan_data: all_docs,
