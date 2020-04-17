@@ -35,7 +35,7 @@ async function getFirebaseDoc(collection_name, doc_name) {
     return res;
 };
 
-async function getFirebaseSubCollectionDoc(collection_name, doc_name, sub_collection_name, sub_doc_name) {
+async function getFirebaseDocFromSubCollection(collection_name, doc_name, sub_collection_name, sub_doc_name) {
     try{
         let final_data = {};
         let upper_document = db.collection(collection_name).doc(doc_name);
@@ -90,7 +90,7 @@ async function doesFirebaseDocExists(collection_name, doc_name) {
 
 module.exports = {
 	get_doc: getFirebaseDoc,
-    get_sub_collection_doc: getFirebaseSubCollectionDoc,
+    get_sub_collection_doc: getFirebaseDocFromSubCollection,
     get_sub_collection_all_docs: getFirebaseAllDocsFromSubCollection,
     does_doc_exists: doesFirebaseDocExists
 }
