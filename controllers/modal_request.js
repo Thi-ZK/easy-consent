@@ -13,8 +13,7 @@ router.get('/modal', (req, res) => { // later on identify which type user wants 
 	console.log(req.cookies);
 	console.log("\n\n\n");
 
-	res.cookie('easy_consent_presence_flag', '0', {maxAge: 9000000});
-	res.cookie('easy_consent_presence_flag2', '0', {maxAge: 9000000, domain: 'zkitens.herokuapp.com'});
+	res.cookie('easy_consent_presence_flag', '0', {maxAge: 9000000, domain: 'zkitens.herokuapp.com'});
 	// check if user has already chosen an option and therefore has the cookie before reading the DB // reduce the number of reads
 	// if (!req.cookies.easy_consent_presence_flag) {
 		let domain = req.query.domain || "127.0.0.1:9999";
