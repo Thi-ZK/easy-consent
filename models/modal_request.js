@@ -41,7 +41,7 @@ async function getFirebaseDocFromSubCollection(collection_name, doc_name, sub_co
         let upper_document = db.collection(collection_name).doc(doc_name);
 
         let doc_content = await upper_document.get();
-        if (!doc_content.exists) {throw "Not Allowed";} // verify if the domain is registered
+        if (!doc_content.exists) {throw "Not Allowed / C1";} // verify if the domain is registered
 
         let sub_collection = upper_document.collection(sub_collection_name, sub_doc_name);
         
@@ -65,7 +65,7 @@ async function getFirebaseAllDocsFromSubCollection(collection_name, doc_name, su
         let upper_document = db.collection(collection_name).doc(doc_name);
 
         let doc_content = await upper_document.get();
-        if (!doc_content.exists) {throw "Not Allowed";} // verify if the domain is registered
+        if (!doc_content.exists) {throw "Not Allowed C2";} // verify if the domain is registered
 
         let sub_collection = upper_document.collection(sub_collection_name);
         
