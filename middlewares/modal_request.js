@@ -11,7 +11,7 @@ cookieSetForReducingReads = (req, res, next) => {
 	next();
 }
 
-cookieSetForReducingReads = (req, res, next) => {
+cookieClearForReducingReads = (req, res, next) => {
 	res.clearCookie('easy_consent_rdr_flag');
 	next();
 }
@@ -27,6 +27,6 @@ checkIfHostIsLocalHost = (req, res, next) => {
 module.exports = {
 	cookie_verification_rdr: cookieVerificationForReducingReads,
 	cookie_set_rdr: cookieSetForReducingReads,
-	cookie_clear_rdr: cookieSetForReducingReads,
+	cookie_clear_rdr: cookieClearForReducingReads,
 	check_if_host_is_local_host: checkIfHostIsLocalHost
 };
