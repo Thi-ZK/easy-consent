@@ -5,37 +5,19 @@ const db_model = require("../models/modal_request.js");
 const middws = require("../middlewares/modal_request.js");
 
 // For Production Handling  ---- Complete Modal With Cookie Scanning
-router.get('/modal', middws.cookie_verification_rdr, (req, res) => { // later on identify which type user wants the modal, with or without cookies descrp and if only warn modal
-	let domain = req.query.domain || "127.0.0.1:9999";
+router.get('/modal', middws.cookie_verification_rdr, middws.get_scanned_cookies_from_domain, (req, res) => {
 	let lang = req.query.lang;
 	const modal_to_render = 'modals_with_cookie_scan/modal_js_' + (lang || 'br');
 
-	//get cookies from domain and already verify if domain is registered. cookies are documents
-	db_model.get_sub_collection_all_docs('clients', domain, 'cookie_scan_results').then(all_docs => {
-		let all_data = {
-			scan_data: all_docs,
-			modal_domain_flag: domain
-		};
-
-		// console.log(all_docs);
-		res.render(modal_to_render, all_data);
-	}).catch(error => {
-		// console.log("hallo");
-		res.send(error);
-	});
+	res.render(modal_to_render, res.locals.to_be_passed_data);
 });
 
 //For Production Handling ---- Complete Modal Without Cookie Scanning
-router.get('/modal_ns', middws.cookie_verification_rdr, (req, res) => {
-	let domain = req.query.domain || "127.0.0.1:9999";
+router.get('/modal_ns', middws.cookie_verification_rdr, middws.check_if_domain_is_registered, (req, res) => {
 	let lang = req.query.lang;
 	const modal_to_render = 'modals_without_cookie_scan/modal_js_' + (lang || 'br');
 
-	db_model.does_doc_exists('clients', domain).then(status => {
-		res.render(modal_to_render, {modal_domain_flag: domain});
-	}).catch(error => {
-		res.send("Error / E1");
-	});
+	res.render(modal_to_render, res.locals.to_be_passed_data);
 });
 
 // sets cookie to prevent readings from db, returning nothing since user don't need the modal
