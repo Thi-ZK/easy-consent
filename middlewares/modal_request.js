@@ -9,7 +9,7 @@ cookieVerificationForReducingReads = (req, res, next) => {
 }
 
 cookieSetForReducingReads = (req, res, next) => {
-	res.cookie('easy_consent_rdr_flag', '1', {maxAge: 63113804000});
+	res.cookie('easy_consent_rdr_flag', '1', {maxAge: 63113804000, secure: true, httpOnly: true, sameSite: 'none'});
 	next();
 }
 
@@ -64,3 +64,10 @@ module.exports = {
 	get_scanned_cookies_from_domain: getAllScannedCookiesFromDomain,
 	check_if_domain_is_registered: checkIfDomainIsRegistered
 };
+
+
+
+/*
+	all data to be passed to the view is set in the res.locals object. the domain is set for example as modal_domain_flag
+	so to access it (in the view): res.locals.domain
+*/

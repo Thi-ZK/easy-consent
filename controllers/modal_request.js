@@ -36,17 +36,17 @@ router.get('/modal_restore', middws.cookie_clear_rdr, (req, res) => {
 
 // For Implementation & Testing ---- Complete Modal With Cookie Scanning
 router.get('/TEST_MODAL', middws.check_if_host_is_local_host, (req, res) => {
-	db_model.get_sub_collection_all_docs('clients', 'zkitens.herokuapp', 'cookie_scan_results').then(all_docs => {
-		let all_data = {
-			scan_data: all_docs,
-		};
+	// db_model.get_sub_collection_all_docs('clients', 'zkitens.herokuapp', 'cookie_scan_results').then(all_docs => {
+	// 	let all_data = {
+	// 		scan_data: all_docs,
+	// 	};
 
-		// console.log(all_docs);
-		res.render('modals_with_cookie_scan_TEST/modal_' + (req.query.lang || 'br'), all_data);
-	}).catch(error => { console.log(error);
-		// console.log("hallo");
-		res.send(error);
-	});
+	// 	res.render('modals_with_cookie_scan_TEST/modal_' + (req.query.lang || 'br'), all_data);
+	// }).catch(error => { console.log(error);
+	// 	res.send(error);
+	// });
+
+	res.render('modals_warn_TEST/modal_' + (req.query.lang || 'br'));
 });
 
 module.exports = router;
