@@ -9,13 +9,14 @@
             /* Full width (cover the whole page) */
             height: 100%;
             /* Full height (cover the whole page) */
+            visibility: hidden;
             top: 0;
             left: 0;
             right: 0;
-            opacity: 1;
-            -webkit-transition-duration: 1s;
-            -o-transition-duration: 1s;
-            transition-duration: 1s;
+            opacity: 0;
+            -webkit-transition-duration: 0.5s;
+            -o-transition-duration: 0.5s;
+            transition-duration: 0.5s;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.5);
             /* Black background with opacity */
@@ -33,6 +34,8 @@
 
         #opt_in_modal {
             /* DEPTH 2 */
+            visibility: hidden;
+            opacity: 0;
             margin-bottom: 20px !important;
             width: 50vw;
             height: auto;
@@ -46,6 +49,7 @@
             -webkit-box-shadow: 0.25px 0.25px 5px 0.25px #484e57;
             box-shadow: 0.25px 0.25px 5px 0.25px #484e57;
             border-radius: 3px;
+            transition-duration: 0.65s;
         }
 
         #first-page-container {
@@ -67,11 +71,12 @@
             /*DEPTH 5 A*/
             text-align: center !important;
             font-size: 20px !important;
-            padding-top: 15px !important;
+            padding-top: 30px !important;
             font-family: open sans, sans-serif;
             font-weight: lighter;
             letter-spacing: 0.4px;
             color: #8ec524;
+            text-transform: capitalize;
         }
 
         #main-description-first-content-container {
@@ -216,16 +221,14 @@
                 </div>
                 <div id="main-description-container-test">
                     <div id="main-description-first-content-container">
-                        <p>A categoria de cookies <b>Necessários</b> diz respeito a cookies indispensáveis para o funcionamento ideal do website. Os cookies <b>Estatísticos</b> são úteis de diversas formas, principalmente para melhoria constante o website.
-                            E os cookies da categoria <b>Marketing</b> são importantes para o oferecimento do melhor conforto em conteúdo otimizado de diversos meios. É direito seu, de escolher sob sua privacidade. Pedimos contudo, que aceite os cookies,
-                            eles são benéficos e fazem muita diferença. Muito obrigado!</p>
+                        <p>Cookies podem ser vistos como pequenos pedaços de informação que são guardados no seu navegador para diversos usos. Praticamente todo website os utiliza e sempre utilizou. Alguns destes são necessários para funcionamento básico do website. É responsabilidade nossa te avisar sobre seu uso e que ao navegar no website você aceita a utilização dos mesmos. Obrigado!</p>
                     </div>
                     <div id="escape-buttons-container" style="padding-bottom: 40px; padding-left: 34px; padding-right: 40px;">
                         <div id="first-page-buttons-direct-container">
                             <div id="datenschutz-link-container-desktop"></div>
                             <div id="escape-buttons-direct-container">
                                 <button
-                                    id="accept-all-and-proceed" style="cursor: pointer; padding: 18px !important; font-size: 13px !important; background-color: #8ec524 !important; color: #000000 !important; font-family: open sans, sans-serif; font-weight: bold; border: none; width: 154px;">Aceitar</button>
+                                    id="accept-all-and-proceed" style="cursor: pointer; padding: 18px !important; font-size: 13px !important; background-color: #8ec524 !important; color: #000000 !important; font-family: open sans, sans-serif; font-weight: bold; border: none; width: 154px;">Entendi!</button>
                             </div>
                         </div>
                     </div>
@@ -235,5 +238,58 @@
     </div>
 </div>
 <script type="text/javascript">
-	
+	!function(){
+        var entendi_button = document.querySelector("#accept-all-and-proceed");
+        var modal = document.querySelector("#opt_in_modal");
+        var overlay = document.querySelector("#overlay-optin");
+        var is_optin_cookie_present = (document.cookie.indexOf("optin_options_and_flag") > -1) ? true : false;
+
+        var cookie_setting_manager = function(){
+            var time = new Date();
+            time.setTime(time.getTime() + 63113904000);
+
+            document.cookie = "optin_options_and_flag=warn_true;expires=" + time.toUTCString() + ";path=/";
+        }
+
+        var modal_fade_setter = function(){
+            modal.style.visibility = "hidden";
+            modal.style.opacity = "0";
+
+            overlay.style.visibility = "hidden";
+            overlay.style.opacity = "0";
+        }
+
+        var modal_appearer_setter = function(){
+            setTimeout(function(){
+                modal.style.visibility = "visible";
+                modal.style.opacity = "1";
+
+                overlay.style.visibility = "visible";
+                overlay.style.opacity = "1";
+            }, 50);
+        }
+
+        var db_reads_reduction_cookie_management = function(set_or_delete){
+            if (set_or_delete == "set") {
+                var script = document.createElement("script");
+                // script.src = "/modal_request/modal_closed";
+                script.src = "https://easy-consent.herokuapp.com/modal_request/modal_closed";
+                document.body.appendChild(script);
+            }else {
+                var script = document.createElement("script");
+                script.src = "https://easy-consent.herokuapp.com/modal_request/modal_restore";
+                document.body.appendChild(script);
+            }
+        }
+
+        entendi_button.addEventListener("click", function(){
+            cookie_setting_manager();
+            modal_fade_setter();
+            db_reads_reduction_cookie_management("set");
+        });
+
+        if(!is_optin_cookie_present){
+            modal_appearer_setter();
+        }
+    }();
 </script>
