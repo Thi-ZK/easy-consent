@@ -12,12 +12,12 @@ All you have to do is to place a script tag preferably in the head tag of your w
 
 Version with cookies allowance options:
 
-<script src="https://easy-consent.herokuapp.com/modal_request/modal_ns?domain=<your domain>&lang=en"></script>
+<script src="https://easy-consent.herokuapp.com/modal_request/modal_ns?domain=<your domain>&lang=br"></script>
 
 
 Version with only warning:
 
-<script src="https://easy-consent.herokuapp.com/modal_request/modal_warn?domain=<your domain>&lang=en"></script>
+<script src="https://easy-consent.herokuapp.com/modal_request/modal_warn?domain=<your domain>&lang=br"></script>
 
 
 The modal requires the allowance of the domain in the database.
@@ -49,4 +49,4 @@ It is also responsive for any device size.
 
 Is also has a version with cookie scanning, but it is still being made.
 
-<script src="https://easy-consent.herokuapp.com/modal_request/modal?domain=<your domain>&lang=en"></script>
+<script src="https://easy-consent.herokuapp.com/modal_request/modal?domain=<your domain>&lang=br"></script>
