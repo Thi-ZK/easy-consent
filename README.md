@@ -14,9 +14,11 @@ Version with cookies allowance options:
 
 <script src="https://easy-consent.herokuapp.com/modal_request/modal_ns?domain=<your domain>&lang=en"></script>
 
+
 Version with only warning:
 
 <script src="https://easy-consent.herokuapp.com/modal_request/modal_warn?domain=<your domain>&lang=en"></script>
+
 
 The modal requires the allowance of the domain in the database.
 
