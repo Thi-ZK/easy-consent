@@ -44,3 +44,7 @@ The modal is also very light with very few code, summing CSS, JS and HTML lines 
 It also works with most browsers and with no changes in the original from IE 9 above.
 
 It is also responsive for any device size.
+
+Is also has a version with cookie scanning, but it is still being made.
+
+<script src="https://easy-consent.herokuapp.com/modal_request/modal?domain=<your domain>&lang=en"></script>
