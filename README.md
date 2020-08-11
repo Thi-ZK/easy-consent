@@ -12,11 +12,11 @@ All you have to do is to place a script tag preferably in the head tag of your w
 
 Version with cookies allowance options:
 
-<script type="text/javascript" src="/modal_request/modal_ns?domain=<your domain>&lang=en"></script>
+<script src="https://easy-consent.herokuapp.com/modal_request/modal_ns?domain=<your domain>&lang=en"></script>
 
 Version with only warning:
 
-<script type="text/javascript" src="/modal_request/modal_warn?domain=<your domain>&lang=en"></script>
+<script src="https://easy-consent.herokuapp.com/modal_request/modal_warn?domain=<your domain>&lang=en"></script>
 
 The modal requires the allowance of the domain in the database.
 
